@@ -1,3 +1,22 @@
 # EVMbeginner
-Project Overview: MyToken
-MyToken is an Ethereum-based smart contract designed to create and manage a simple token named SUBSTANCE (symbol: SUB). It includes public variables to store the token's name, symbol, and total supply. The contract maintains a mapping of addresses to their token balances, allowing for efficient balance management. The contract features two core functions: mintTokens and burnTokens. The mintTokens function enables the creation of new tokens, which are added to a specified address's balance and increase the overall total supply. Conversely, the burnTokens function allows for the destruction of tokens from a specified address, decreasing both the address's balance and the total supply, with built-in checks to ensure that no address can burn more tokens than it holds. This project highlights basic token management capabilities, serving as a foundational example for more complex token implementations in the blockchain ecosystem.
+Project: Create a Token
+Here we created a MyToken contract that will mint tokens and add them to given addresses.
+We have declared a few public variables:
+ string public token = "SUBSTANCE";  //Token name
+ string public symbol = "SUB";   // Token abbreviation
+ uint public total_supply = 0;  // total supply of token
+Another mapping variable that associates the address with the balances
+ mapping (address => uint) public balances;
+We have a few functions like Mint for minting the token which takes address and balance as parameter
+  function mintTokens(address _recipient, uint _amount) public {
+        accountBalances[_recipient] += _amount;
+        totalSupply += _amount;
+    }
+  another function called burn which burns the token, takes two arguments- address and balance
+   function burnTokens(address _holder, uint _amount) public {
+        if (accountBalances[_holder] >= _amount) {
+            accountBalances[_holder] -= _amount;
+            totalSupply -= _amount;
+        }
+    }
+    In the above, we have a condition to check whether the token to be burned is less than the tokens present in that address.
